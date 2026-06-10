@@ -3,7 +3,7 @@ import { z } from "zod";
 export const updateProfileSchema = z.object({
   body: z.object({
     phone: z.string().min(10, "Phone number is too short").optional().nullable(),
-    dateOfBirth: z.preprocess((arg) => {
+    dateOfBirth: z.preprocess((arg: unknown) => {
       if (typeof arg === "string" || arg instanceof Date) return new Date(arg);
       return undefined;
     }, z.date().optional()),
@@ -17,7 +17,7 @@ export const updateUserSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters").optional(),
     mobile: z.string().min(10, "Mobile number is too short").optional(),
     phone: z.string().min(10, "Phone number is too short").optional(),
-  }).refine((data) => data.name || data.mobile || data.phone, {
+  }).refine((data: { name?: string; mobile?: string; phone?: string }) => data.name || data.mobile || data.phone, {
     message: "At least one field (name, mobile, or phone) must be provided for update",
   })
 });

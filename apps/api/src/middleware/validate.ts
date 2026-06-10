@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ZodTypeAny, ZodError } from "zod";
+import { ZodTypeAny, ZodError, ZodIssue } from "zod";
 import { sendResponse } from "../utils/sendResponse";
 
 export const validateRequest = (schema: ZodTypeAny) => {
@@ -31,9 +31,9 @@ export const validateRequest = (schema: ZodTypeAny) => {
       }
       
       return next();
-    } catch (error) {
+    } catch (error: unknown) {
       if (error instanceof ZodError) {
-        const errors = error.issues.map((issue) => issue.message).join(", ");
+        const errors = error.issues.map((issue: ZodIssue) => issue.message).join(", ");
         return sendResponse(
           res,
           {

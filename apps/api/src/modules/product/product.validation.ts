@@ -41,7 +41,7 @@ export const getProductsQuerySchema = z.object({
   query: z.object({
     category: z.string().optional(),
     brand: z.string().optional(),
-    isActive: z.preprocess((val) => {
+    isActive: z.preprocess((val: unknown) => {
       if (val === "true") return true;
       if (val === "false") return false;
       return undefined;
