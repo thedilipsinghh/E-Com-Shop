@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -143,7 +143,7 @@ const menuItems = [
   { id: "settings", label: "Account Settings", icon: Settings },
 ]
 
-export default function AccountPage() {
+function AccountContent() {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const { showSuccess, showError } = useToast()
@@ -779,5 +779,13 @@ export default function AccountPage() {
       </main>
       <Footer />
     </>
+  )
+}
+
+export default function AccountPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}>
+      <AccountContent />
+    </Suspense>
   )
 }

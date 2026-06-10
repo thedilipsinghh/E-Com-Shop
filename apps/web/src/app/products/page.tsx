@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -13,7 +13,7 @@ import { useGetProductsQuery } from "@/redux/apis/product.api";
 import Link from "next/link";
 import { Search, SlidersHorizontal, ArrowUpDown, Tag, X } from "lucide-react"
 
-export default function ProductsPage() {
+function ProductsContent() {
   const { data: products = [], isLoading, error, refetch } = useGetProductsQuery();
   
   const [searchQuery, setSearchQuery] = useState("")
@@ -293,4 +293,12 @@ export default function ProductsPage() {
       <Footer />
     </>
   );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ProductsContent />
+    </Suspense>
+  )
 }
