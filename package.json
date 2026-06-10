@@ -20,5 +20,10 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "enhanced-resolve": "^5.21.0",
+    "object-inspect": "^1.13.4",
+    "zod": "^4.4.3"
+  }
 }

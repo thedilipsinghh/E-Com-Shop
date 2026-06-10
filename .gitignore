@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # Dependencies
 node_modules
 .pnp
@@ -25,8 +23,7 @@ coverage
 .next/
 out/
 build
-dist
-
+dist/
 
 # Debug
 npm-debug.log*
@@ -36,3 +33,20 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Database
+*.sql
+*.sqlite
+
+# Secrets (do NOT commit)
+*.key
+*.pem
+credentials.json
+serviceAccountKey.json

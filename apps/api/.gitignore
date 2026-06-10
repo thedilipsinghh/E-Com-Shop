@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+
+# Environment files (do not commit)
+.env
+.env.local
+.env.production
+!.env.example
+
+# Build
+dist
+build
+
+# Logs
+*.log
+logs
+
+# Database
+*.sqlite
+*.db
+
+# Misc
+.DS_Store
+*.pem
+.vercel
